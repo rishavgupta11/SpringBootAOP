@@ -1,0 +1,56 @@
+plugins {
+    // Spring Boot and Dependency Management Plugins
+    id 'org.springframework.boot' version '3.1.5'
+    id 'io.spring.dependency-management' version '1.1.3'
+    id 'java'
+    id 'application' // Optional, only needed if you're building a CLI application
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '21' // Specify your Java version (ensure you have JDK 21 installed)
+
+repositories {
+    // Use Maven Central to resolve dependencies
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // AspectJ dependencies for AOP
+    implementation 'org.aspectj:aspectjrt:1.9.20' // Replace with the latest version
+    implementation 'org.aspectj:aspectjweaver:1.9.20' // Replace with the latest version
+
+    // Lombok for boilerplate code reduction
+    implementation 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    // Testing dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+java {
+    // Configure the Java toolchain for the desired version
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    // Define the main class for CLI applications
+    mainClass = 'org.example.App'
+}
+
+testing {
+    suites {
+        // Configure the built-in test suite
+        test {
+            // Use JUnit Jupiter test framework
+            useJUnitJupiter('5.10.3') // Ensure compatibility
+        }
+    }
+}
